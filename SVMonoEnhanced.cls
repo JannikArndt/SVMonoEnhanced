@@ -1,5 +1,6 @@
 % SVMONO DOCUMENT CLASS -- version 5.5 (17-Dec-09)
 % Springer Verlag global LaTeX2e support for monographs
+% Enhanced version by Jannik Arndt, www.jannikarndt.de, 2014
 %%
 %%
 %% \CharacterTable
@@ -19,8 +20,7 @@
 %%   Right brace   \}     Tilde         \~}
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{svmono}[2009/12/17 v5.5
-^^JSpringer Verlag global LaTeX document class for monographs]
+\ProvidesClass{SVMonoEnhanced}[2014/08/21 v1.0 by Jannik Arndt]
 %
 % Options
 % citations
@@ -133,7 +133,7 @@
 \DeclareOption{sectrefs}{\let\secbibl=Y}
 %
 % footinfo option (provides an informatory line on every page)
-\def\SpringerMacroPackageNameA{svmono.cls}
+\def\SpringerMacroPackageNameA{SVMonoEnhanced.cls}
 % \thetime, \thedate and \timstamp are macros to include
 % time, date (or both) of the TeX run in the document
 \def\maketimestamp{\count255=\time
@@ -167,9 +167,9 @@
 \DeclareOption{11pt}{\OptionNotUsed}
 \DeclareOption{12pt}{\OptionNotUsed}
 % options for the article class
-\def\@rticle@options{10pt,twoside}
+\def\@rticle@options{12pt,twoside}
 % fleqn
-\DeclareOption{fleqn}{\def\@rticle@options{10pt,twoside,fleqn}%
+\DeclareOption{fleqn}{\def\@rticle@options{12pt,twoside,fleqn}%
 \AtEndOfClass{\let\leftlegendglue\relax}%
 \AtBeginDocument{\mathindent\parindent}}
 % hanging sectioning titles
@@ -196,7 +196,7 @@
 \renewenvironment{svgraybox}%
        {\fboxsep=12pt\relax
         \begin{shaded}%
-        \list{}{\leftmargin=12pt\rightmargin=2\leftmargin\leftmargin=\z@\topsep=\z@\relax}%
+        \list{}{\leftmargin=0pt\rightmargin=\leftmargin\topsep=\z@\relax}%
         \expandafter\item\parindent=\svparindent
         \hskip-\listparindent}%
        {\endlist\end{shaded}}%
@@ -236,7 +236,7 @@ passing it to article class \MessageBreak
 \setlength\oddsidemargin   {63\p@}
 \setlength\evensidemargin  {63\p@}
 \setlength\marginparwidth{90\p@}
-\setlength\headsep   {12\p@}
+\setlength\headsep   {22\p@}
 
 \newdimen\svparindent
 \setlength{\svparindent}{12\p@}
@@ -261,31 +261,45 @@ passing it to article class \MessageBreak
 \headlineindent=2.5cc                % number and gap of running heads
 
 % fonts, sizes, and the like
+% change to 12pt (GM: several lines)----start
 \renewcommand\normalsize{%
-   \@setfontsize\normalsize\@xpt\@xiipt
-   \abovedisplayskip 10\p@ % \@plus2\p@ \@minus5\p@
-   \abovedisplayshortskip \z@ % \@plus3\p@
-   \belowdisplayshortskip 6\p@ %\@plus3\p@ \@minus3\p@
+   \@setfontsize\normalsize\@xiipt{14.5}%
+   \abovedisplayskip 12\p@ \@plus3\p@ \@minus7\p@
+   \abovedisplayshortskip \z@ \@plus3\p@
+   \belowdisplayshortskip 6.5\p@ \@plus3.5\p@ \@minus3\p@
    \belowdisplayskip \abovedisplayskip
    \let\@listi\@listI}
 \normalsize
 \renewcommand\small{%
-   \@setfontsize\small{8.5}{10}%
-   \abovedisplayskip 8.5\p@ % \@plus3\p@ \@minus4\p@
-   \abovedisplayshortskip \z@ %\@plus2\p@
-   \belowdisplayshortskip 4\p@ %\@plus2\p@ \@minus2\p@
+   \@setfontsize\small\@xipt{13.6}%
+   \abovedisplayskip 11\p@ \@plus3\p@ \@minus6\p@
+   \abovedisplayshortskip \z@ \@plus3\p@
+   \belowdisplayshortskip 6.5\p@ \@plus3.5\p@ \@minus3\p@
    \def\@listi{\leftmargin\leftmargini
-               \parsep \z@ \@plus\p@ \@minus\p@
-               \topsep 6\p@ \@plus2\p@ \@minus4\p@
-               \itemsep\z@}%
+               \topsep 9\p@ \@plus3\p@ \@minus5\p@
+               \parsep 4.5\p@ \@plus2\p@ \@minus\p@
+               \itemsep \parsep}%
    \belowdisplayskip \abovedisplayskip
 }
-%
-\let\footnotesize=\small
-%
-\renewcommand\Large{\@setfontsize\large{14}{16}}
-\newcommand\LArge{\@setfontsize\Large{16}{18}}
-\renewcommand\LARGE{\@setfontsize\LARGE{18}{20}}
+\renewcommand\footnotesize{%
+   \@setfontsize\footnotesize\@xpt\@xiipt
+   \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
+   \abovedisplayshortskip \z@ \@plus3\p@
+   \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+   \def\@listi{\leftmargin\leftmargini
+               \topsep 6\p@ \@plus2\p@ \@minus2\p@
+               \parsep 3\p@ \@plus2\p@ \@minus\p@
+               \itemsep \parsep}%
+   \belowdisplayskip \abovedisplayskip
+}
+\renewcommand\scriptsize{\@setfontsize\scriptsize\@viiipt{9.5}}
+\renewcommand\tiny{\@setfontsize\tiny\@vipt\@viipt}
+\renewcommand\large{\@setfontsize\large\@xivpt{18}}
+\renewcommand\Large{\@setfontsize\Large\@xviipt{22}}
+\newcommand\LArge{\@setfontsize\Large{18}{23.5}}
+\renewcommand\LARGE{\@setfontsize\LARGE\@xxpt{25}}
+\renewcommand\huge{\@setfontsize\huge\@xxvpt{30}}
+\renewcommand\Huge{\@setfontsize\Huge\@xxvpt{35}}
 %
 \newenvironment{petit}{\par\addvspace{6\p@}\small}{\par\addvspace{6\p@}}
 %
@@ -309,19 +323,19 @@ passing it to article class \MessageBreak
 \newcommand{\partnumstyle}{\bfseries\boldmath}
 \newcommand{\partsize}{\LARGE}
 \newcommand{\partstyle}{\bfseries\boldmath}
-\newcommand{\chapnumsize}{\Large}
-\newcommand{\chapnumstyle}{\bfseries\boldmath}
-\newcommand{\chapsize}{\LArge}
-\newcommand{\chapstyle}{\bfseries\boldmath}
+\newcommand{\chapnumsize}{\Huge}
+\newcommand{\chapnumstyle}{\bfseries\boldmath\color[RGB]{58,85,112}\centering}
+\newcommand{\chapsize}{\Large}
+\newcommand{\chapstyle}{\rm\itshape\color[RGB]{58,85,112}\centering}
 \newcommand{\chapauthsize}{\normalsize}
 \newcommand{\chapauthstyle}{\bfseries\boldmath}
 \newcommand{\mottosize}{\small}
 \newcommand{\mottostyle}{\itshape\unboldmath\raggedright}
-\newcommand{\secsize}{\large}
-\newcommand{\secstyle}{\bfseries\boldmath}
+\newcommand{\secsize}{\Large}
+\newcommand{\secstyle}{\centering\itshape\color[RGB]{58,85,112}}
 \newcommand{\subsecsize}{\large}
-\newcommand{\subsecstyle}{\bfseries\itshape\boldmath}
-\newcommand{\subsubsecstyle}{\bfseries\boldmath}
+\newcommand{\subsecstyle}{\color[RGB]{58,85,112}}
+\newcommand{\subsubsecstyle}{\color[RGB]{58,85,112}}
 %
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
     \hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
@@ -521,7 +535,7 @@ passing it to article class \MessageBreak
   \ifdim\pagetotal>167\p@
      \vskip 11\p@
   \else
-     \@tempdima=167\p@\advance\@tempdima by-\pagetotal
+     \@tempdima=90\p@\advance\@tempdima by-\pagetotal
      \vskip\@tempdima
   \fi}}
 
@@ -535,7 +549,7 @@ passing it to article class \MessageBreak
   \ifdim\pagetotal>167\p@
      \vskip 11\p@
   \else
-     \@tempdima=168\p@\advance\@tempdima by-\pagetotal
+     \@tempdima=90\p@\advance\@tempdima by-\pagetotal
      \vskip\@tempdima
   \fi}}
 %
@@ -576,12 +590,12 @@ passing it to article class \MessageBreak
 \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
                        {-24\p@}% \p@lus -4\p@ \@minus -4\p@}%
                        {12\p@}% \p@lus 4\p@ \@minus 4\p@}%
-                       {\normalfont\normalsize\upshape
+                       {\normalfont\normalsize\upshape\color[RGB]{58,85,112}
                         \rightskip=\z@ \@plus 8em\pretolerance=10000 }}
 \renewcommand\subparagraph{\@startsection{paragraph}{4}{\z@}%
                        {-18\p@}% \p@lus -4\p@ \@minus -4\p@}%
                        {6\p@}% \p@lus 4\p@ \@minus 4\p@}%
-                       {\normalfont\normalsize\itshape
+                       {\normalfont\normalsize\itshape\color[RGB]{58,85,112}
                         \rightskip=\z@ \@plus 8em\pretolerance=10000 }}
 \newcommand\runinhead{\@startsection{paragraph}{4}{\z@}%
                        {-6\p@}% \p@lus -4\p@ \@minus -4\p@}%
@@ -717,7 +731,7 @@ passing it to article class \MessageBreak
                         \itemindent    \listparindent
                         \rightmargin   \leftmargin
                         \parsep        \z@ \@plus\p@%
-                        \small}%
+                        }%\small}%
                 \item\relax\hskip-\listparindent}
                {\endlist}
 %
@@ -1193,7 +1207,7 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
 \setlength\tabcolsep{1.5\p@}
 
 \def\tableofcontents{\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
- \fi\chapter*{\contentsname \@mkboth{{\contentsname}}{{\contentsname}}}
+ \fi\chapter*{\rm\bfseries\Huge\contentsname \@mkboth{{\contentsname}}{{\contentsname}}}
  \@starttoc{toc}\if@restonecol\twocolumn\fi}
 
 \setcounter{tocdepth}{2}
@@ -1301,16 +1315,29 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
 \def\l@paragraph{\@dottedtocline{4}{\tocsubsubsectotal}{\tocparanum}}
 \def\l@subparagraph{\@dottedtocline{5}{\tocparatotal}{\tocsubparanum}}
 
+%\renewcommand\listoflistings{%
+%    \chapter*{\rm\bfseries\Huge\listoflistingscaption
+%      \@mkboth{\listoflistingscaption}{\listoflistingscaption}}%
+%    \@starttoc{lol}%
+%  }
+
+
 \renewcommand\listoffigures{%
-    \chapter*{\listfigurename
+    \chapter*{\rm\bfseries\Huge\listfigurename
       \@mkboth{\listfigurename}{\listfigurename}}%
     \@starttoc{lof}%
     }
 
 \renewcommand\listoftables{%
-    \chapter*{\listtablename
+    \chapter*{\rm\bfseries\Huge\listtablename
       \@mkboth{\listtablename}{\listtablename}}%
     \@starttoc{lot}%
+    }
+
+\newcommand\glossarytitle{%
+    \chapter*{\rm\bfseries\Huge Glossary
+      \@mkboth{Glossary}{Glossary}}%
+	\addcontentsline{toc}{chapter}{Glossary}%
     }
 
 \newenvironment{thecontriblist}
@@ -1719,11 +1746,11 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
 %
 \AtBeginDocument{%
 \ifx\secbibl\undefined
-   \def\bibsection{\chapter*{\refname}\markboth{\refname}{\refname}%
+   \def\bibsection{\chapter*{\rm\bfseries\Huge\refname}\markboth{\refname}{\refname}%
       \addcontentsline{toc}{chapter}{\refname}%
       \csname biblst@rthook\endcsname\par}
 \else
-   \def\bibsection{\section*{\refname}\markright{\refname}%
+   \def\bibsection{\section*{\rm\bfseries\Huge\refname}\markright{\refname}%
       \addcontentsline{toc}{section}{\refname}%
       \csname biblst@rthook\endcsname\par}
 \fi}
@@ -1761,7 +1788,7 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
 \else % original bibliography is required
    \let\bibname=\refname
    \renewenvironment{thebibliography}[1]
-     {\chapter*{\bibname
+     {\chapter*{\rm\bfseries\Huge\bibname
         \@mkboth{\bibname}{\bibname}}%
       \list{\@biblabel{\@arabic\c@enumiv}}%
            {\settowidth\labelwidth{\@biblabel{#1}}%
@@ -1781,6 +1808,8 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
       \endlist}
 \fi
 
+% INDEX
+
 \let\if@threecolind\iffalse
 \def\threecolindex{\let\if@threecolind\iftrue}
 \def\indexstarthook#1{\gdef\indexst@rthook{#1}}
@@ -1794,9 +1823,9 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
                 \columnsep 1cc
                 \@nobreaktrue
                 \if@threecolind
-                   \begin{multicols}{3}[\chapter*{\indexname}%
+                   \begin{multicols}{3}[\chapter*{\rm\bfseries\Huge\indexname}%
                 \else
-                   \begin{multicols}{2}[\chapter*{\indexname}%
+                   \begin{multicols}{2}[\chapter*{\rm\bfseries\Huge\indexname}%
                 \fi
                 {\csname indexst@rthook\endcsname}]%
                 \global\let\indexst@rthook=\undefined
@@ -1832,6 +1861,29 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
 \def\subtitle#1{\gdef\@subtitle{#1}}
 \def\@subtitle{}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Eigene
+\def\frontimage#1{\gdef\@frontimage{#1}}
+\def\@frontimage{}
+
+\def\thesistype#1{\gdef\@thesistype{#1}}
+\def\@thesistype{}
+
+\def\unilogo#1{\gdef\@unilogo{#1}}
+\def\@unilogo{}
+
+\def\university#1{\gdef\@university{#1}}
+\def\@university{}
+
+\def\faculty#1{\gdef\@faculty{#1}}
+\def\@faculty{}
+
+\def\erstgutachterin#1{\gdef\@erstgutachterin{#1}}
+\def\@erstgutachterin{}
+
+\def\zweitgutachterin#1{\gdef\@zweitgutachterin{#1}}
+\def\@zweitgutachterin{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \def\maketitle{\par
  \begingroup
    \def\thefootnote{\fnsymbol{footnote}}%
@@ -1851,36 +1903,50 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
 
 \def\@maketitle{\newpage
  \null
- \vskip 2em                 % Vertical space above title.
 \begingroup
   \def\and{\unskip, }
   \parindent=\z@
   \pretolerance=10000
   \rightskip=\z@ \@plus 3cm
-  {\LARGE                   % each author set in \LARGE
-   \lineskip .5em
-   \@author
-   \par}%
-  \vskip 2cm                % Vertical space after author.
-  {\Huge \@title \par}%     % Title set in \Huge size.
-  \vskip 1cm                % Vertical space after title.
+% Title
+  {\Huge\bfseries\centering\color[RGB]{58,85,112} \@title \par}
+  \vskip 0.1cm
+%Subtitle
   \if!\@subtitle!\else
-   {\LARGE\ignorespaces\@subtitle \par}
-   \vskip 1cm                % Vertical space after subtitle.
+   {\Large\ignorespaces\it\centering\color[RGB]{92,67,43}\@subtitle \par}
+   \vskip 1cm
   \fi
+% Image
+  \if!\@frontimage!\else
+	\centering\includegraphics[width=0.5\textwidth]{\@frontimage}\par
+    \vskip 1.5em
+  \fi
+% Author
+  \if!\@author!\else
+  {\Large\lineskip .5em\centering\@author\par}
+  \vskip .2cm
+  \fi
+% Date
   \if!\@date!\else
-    {\large \@date}%          % Date set in \large size.
-    \par
-    \vskip 1.5em               % Vertical space after date.
+    {\normalsize\centering \@date\par}
+		\vskip .6cm 
   \fi
+% Thesis Type
+  \if!\@thesistype!\else
+    {\small\centering \@thesistype}%          % Date set in \large size.
+  \fi
+% Bottom Information
  \vfill
- {\Large Springer\par}
-%\vskip 5\p@
-%\large
-%  Berlin\enspace Heidelberg\enspace New\kern0.1em York\\
-%  Hong\thinspace Kong\enspace London\\
-%  Milan\enspace Paris\enspace Tokyo\par
-\endgroup}
+ \raggedright
+ {\includegraphics[width=40mm]{\@unilogo}}\par
+ {\normalsize\ignorespaces\@university \par}
+ \vskip .1cm
+ {\normalsize\ignorespaces\@faculty \par} 
+ \vskip .2cm
+ {\ignorespaces\itshape\@erstgutachterin} 
+ \vskip .1cm
+ {\ignorespaces\itshape\@zweitgutachterin}
+ \endgroup}
 
 % Useful environments
 \newenvironment{acknowledgement}{\par\addvspace{17\p@}\small\rm
@@ -1906,7 +1972,7 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
 %
 % define the running headings of a twoside text
 \def\runheadsize{\small}
-\def\runheadstyle{\rmfamily\upshape}
+\def\runheadstyle{\rmfamily\upshape\it\color[RGB]{58,85,112}}
 \def\customizhead{\hspace{\headlineindent}}
 
 \def\ps@bchap{%\let\@mkboth\@gobbletwo
@@ -1939,5 +2005,32 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
 
 \ps@headings
 
+% Custom Fonts
+\RequirePackage[T1]{fontenc}
+\RequirePackage{fix-cm}
+\RequirePackage[fleqn]{amsmath}
+\RequirePackage{kpfonts}
+\RequirePackage{fontspec}
+\setmainfont[Mapping=tex-text]{Baskerville}
+\setmonofont[Scale=.8]{Consolas}
+\linespread{1.2}
+\RequirePackage{microtype}
+\RequirePackage{fixltx2e}
+\RequirePackage{makeidx} 
+\RequirePackage{color}
+\RequirePackage{enumerate}
+%\RequirePackage{listings} 
+
+\RequirePackage{graphicx}
+\RequirePackage{cite}
+\RequirePackage{multicol}
+\RequirePackage[bottom]{footmisc}
+
+\renewcommand{\*}{{\, \cdot \,}}
+
+% Rückt in description-Umgebungen die Beschreibungen um die Länge des längsten Elementes ein (http://uweziegenhagen.de/?p=795)
+\RequirePackage{eqlist} 
+\let\description=\eqlist \let
+\enddescription=
+\endeqlist \let\eqlistlabel\descriptionlabel
 \endinput
-%end of file svmono.cls
