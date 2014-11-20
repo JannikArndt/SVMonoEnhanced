@@ -1,4 +1,4 @@
-SVMonoEnhanced XeLaTeX document class
+SVMonoEnhanced LaTeX document class
 ==============
 
 This is a more beautiful version of the Springer SVMono document class found at [http://www.springer.com/computer/lncs?SGWID=0-164-6-793341-0]. Its improvements are
@@ -10,7 +10,7 @@ This is a more beautiful version of the Springer SVMono document class found at 
 - custom fonts: Baskerville for text, Consolas for Code (requires XeLaTeX)
 - automatically includes several packages
 
-#####Usage#####
+###Usage###
 Declare document class with
 
 `\documentclass[graybox,envcountchap]{SVMonoEnhanced}`
@@ -25,6 +25,7 @@ Write the document as
 
 \usepackage{amssymb,amscd}
 \usepackage{hyperref}
+
 ...
 
 \begin{document}
@@ -50,7 +51,11 @@ Write the document as
 \setcounter{secnumdepth}{0}
 
 \mainmatter 
+
 ...
+
 \end{document} 
 ```
 
+###Contributions###
+This document class is very specific and you will most certainly ave to change something. If you feel that others may benefit from these changes, create a pull request!
